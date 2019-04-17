@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Filterable Contact List</title>
+	<link rel="icon" href="contact.png" type="image/png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h3 class="center-align"><img src="contact.png" style="height: 40px; width: 40px;">  My Contacts</h3>
+		<input type="text" id="filterInput" placeholder="Search name here">
+
+		<!-- 'collection with-header' is a materialize css class -->
+		<ul id="names" class="collection with-header">
+		    <li class="collection-header"><h5>A</h5></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Arun</a>
+		    </li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Ajay</a>
+		    </li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Amar</a></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Akbar</a></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Anthony</a></li>
+		    <li class="collection-header"><h5>B</h5></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Boman</a></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Bill</a></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Beck</a></li>
+		    <li class="collection-header"><h5>C</h5></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Cara</a></li>
+		    <li class="collection-item avatar">
+		    	<img src="user.png" alt="" class="circle">
+		    	<a href="#" class="anchor">Carman</a></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		// JQuery
+		$(document).ready(function(){
+
+			// Function with 'ul' as argument
+			listFilter($('#names'));
+
+			// Function defination
+			function listFilter(names){
+
+				// Listening to the keyboard 'keyup' event
+				$('input').keyup(function(){
+
+					// when 'keyup' call 'change()' as below
+					$(this).change();
+				}).change(function() {
+
+					// storing the input value 
+					var filter = $(this).val();
+					console.log(filter);
+
+					// check if value present
+					if(filter){
+
+						// ':contains' is a selector to select all the elements containing the 'text' 
+						// if 'not contains' the 'text' in any of 'a' then simply hide 
+						$(names).find('a:not(:contains('+ filter +'))').parent().slideUp();
+
+						// if 'contains' then show 
+						$(names).find('a:contains('+ filter +')').parent().slideDown();
+					} else {
+
+						// If no input then show all
+						$(names).find('li').slideDown();
+					} return false;
+				});
+			}	
+		});
+	</script>
+</body>
+</html>
